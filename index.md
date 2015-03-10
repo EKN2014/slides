@@ -31,116 +31,28 @@ After loading the data set, i built the regression model using bwt as the outcom
 
 ```r
 library(MASS)
-```
-
-```
-## Error in FUN("birthwt"[[1L]], ...): cannot open file 'C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb': No such file or directory
-```
-
-```r
 library(plyr)
-data(birthwt)
-```
+#data(birthwt)
 
-```
-## Warning in data(birthwt): data set 'birthwt' not found
-```
+#birthwt$race <- as.factor(birthwt$race)
+#birthwt$smoke <- as.factor(birthwt$smoke)
+#birthwt$ui <- as.factor(birthwt$ui)
+#birthwt$low <- as.factor(birthwt$low)
 
-```r
-birthwt$race <- as.factor(birthwt$race)
-```
+#fit <- lm(bwt~., data=birthwt)
 
-```
-## Warning in is.factor(x): restarting interrupted promise evaluation
-```
+#step <- stepAIC(fit, direction="both")
+#step$anova
 
-```
-## Error in is.factor(x): cannot open file 'C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb': No such file or directory
-```
+#bestfit <- lm(bwt ~ age +  race + smoke + ui +low , data=birthwt)
 
-```r
-birthwt$smoke <- as.factor(birthwt$smoke)
-```
 
-```
-## Warning in is.factor(x): restarting interrupted promise evaluation
-```
-
-```
-## Error in is.factor(x): cannot open file 'C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb': No such file or directory
-```
-
-```r
-birthwt$ui <- as.factor(birthwt$ui)
-```
-
-```
-## Warning in is.factor(x): restarting interrupted promise evaluation
-```
-
-```
-## Error in is.factor(x): cannot open file 'C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb': No such file or directory
-```
-
-```r
-birthwt$low <- as.factor(birthwt$low)
-```
-
-```
-## Warning in is.factor(x): restarting interrupted promise evaluation
-```
-
-```
-## Error in is.factor(x): cannot open file 'C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb': No such file or directory
-```
-
-```r
-fit <- lm(bwt~., data=birthwt)
-```
-
-```
-## Warning in is.data.frame(data): restarting interrupted promise evaluation
-```
-
-```
-## Error in is.data.frame(data): cannot open file 'C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb': No such file or directory
-```
-
-```r
-step <- stepAIC(fit, direction="both")
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "stepAIC"
-```
-
-```r
-step$anova
-```
-
-```
-## Error in eval(expr, envir, enclos): cannot open file 'C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb': No such file or directory
-```
-
-```r
-bestfit <- lm(bwt ~ age +  race + smoke + ui +low , data=birthwt)
-```
-
-```
-## Warning in is.data.frame(data): restarting interrupted promise evaluation
-```
-
-```
-## Error in is.data.frame(data): cannot open file 'C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb': No such file or directory
-```
-
-```r
-predictbwt <- function(age1, race1, smoke1, ui1, low1)
-{
-        newdata<- data.frame(age=age1, race=race1, smoke=smoke1, ui=ui1, low=low1)
-        res <-round(predict(bestfit, newdata)[[1]], 2)
-        res
-}
+#predictbwt <- function(age1, race1, smoke1, ui1, low1)
+#{
+#        newdata<- data.frame(age=age1, race=race1, smoke=smoke1, ui=ui1, low=low1)
+#        res <-round(predict(bestfit, newdata)[[1]], 2)
+#        res
+#}
 ```
 
 --- 
@@ -178,14 +90,8 @@ There are five input values in server.R. The output widgets are put in the main 
 
 ```r
 library(shiny)
-data(birthwt)
-```
+#data(birthwt)
 
-```
-## Warning in data(birthwt): data set 'birthwt' not found
-```
-
-```r
 shinyUI(pageWithSidebar(
        headerPanel("Predicting Weight of Children at Birth"),
        sidebarPanel( 

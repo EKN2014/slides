@@ -62,90 +62,28 @@
 <p>After loading the data set, i built the regression model using bwt as the outcome variable and low, race, ui, age and smoke as predictor variables </p>
 
 <pre><code class="r">library(MASS)
-</code></pre>
+library(plyr)
+#data(birthwt)
 
-<pre><code>## Error in FUN(&quot;birthwt&quot;[[1L]], ...): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
-</code></pre>
+#birthwt$race &lt;- as.factor(birthwt$race)
+#birthwt$smoke &lt;- as.factor(birthwt$smoke)
+#birthwt$ui &lt;- as.factor(birthwt$ui)
+#birthwt$low &lt;- as.factor(birthwt$low)
 
-<pre><code class="r">library(plyr)
-data(birthwt)
-</code></pre>
+#fit &lt;- lm(bwt~., data=birthwt)
 
-<pre><code>## Warning in data(birthwt): data set &#39;birthwt&#39; not found
-</code></pre>
+#step &lt;- stepAIC(fit, direction=&quot;both&quot;)
+#step$anova
 
-<pre><code class="r">birthwt$race &lt;- as.factor(birthwt$race)
-</code></pre>
+#bestfit &lt;- lm(bwt ~ age +  race + smoke + ui +low , data=birthwt)
 
-<pre><code>## Warning in is.factor(x): restarting interrupted promise evaluation
-</code></pre>
 
-<pre><code>## Error in is.factor(x): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
-</code></pre>
-
-<pre><code class="r">birthwt$smoke &lt;- as.factor(birthwt$smoke)
-</code></pre>
-
-<pre><code>## Warning in is.factor(x): restarting interrupted promise evaluation
-</code></pre>
-
-<pre><code>## Error in is.factor(x): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
-</code></pre>
-
-<pre><code class="r">birthwt$ui &lt;- as.factor(birthwt$ui)
-</code></pre>
-
-<pre><code>## Warning in is.factor(x): restarting interrupted promise evaluation
-</code></pre>
-
-<pre><code>## Error in is.factor(x): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
-</code></pre>
-
-<pre><code class="r">birthwt$low &lt;- as.factor(birthwt$low)
-</code></pre>
-
-<pre><code>## Warning in is.factor(x): restarting interrupted promise evaluation
-</code></pre>
-
-<pre><code>## Error in is.factor(x): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
-</code></pre>
-
-<pre><code class="r">fit &lt;- lm(bwt~., data=birthwt)
-</code></pre>
-
-<pre><code>## Warning in is.data.frame(data): restarting interrupted promise evaluation
-</code></pre>
-
-<pre><code>## Error in is.data.frame(data): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
-</code></pre>
-
-<pre><code class="r">step &lt;- stepAIC(fit, direction=&quot;both&quot;)
-</code></pre>
-
-<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;stepAIC&quot;
-</code></pre>
-
-<pre><code class="r">step$anova
-</code></pre>
-
-<pre><code>## Error in eval(expr, envir, enclos): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
-</code></pre>
-
-<pre><code class="r">bestfit &lt;- lm(bwt ~ age +  race + smoke + ui +low , data=birthwt)
-</code></pre>
-
-<pre><code>## Warning in is.data.frame(data): restarting interrupted promise evaluation
-</code></pre>
-
-<pre><code>## Error in is.data.frame(data): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
-</code></pre>
-
-<pre><code class="r">predictbwt &lt;- function(age1, race1, smoke1, ui1, low1)
-{
-        newdata&lt;- data.frame(age=age1, race=race1, smoke=smoke1, ui=ui1, low=low1)
-        res &lt;-round(predict(bestfit, newdata)[[1]], 2)
-        res
-}
+#predictbwt &lt;- function(age1, race1, smoke1, ui1, low1)
+#{
+#        newdata&lt;- data.frame(age=age1, race=race1, smoke=smoke1, ui=ui1, low=low1)
+#        res &lt;-round(predict(bestfit, newdata)[[1]], 2)
+#        res
+#}
 </code></pre>
 
   </article>
@@ -183,13 +121,9 @@ shinyServer(
 <p>There are five input values in server.R. The output widgets are put in the main panel. </p>
 
 <pre><code class="r">library(shiny)
-data(birthwt)
-</code></pre>
+#data(birthwt)
 
-<pre><code>## Warning in data(birthwt): data set &#39;birthwt&#39; not found
-</code></pre>
-
-<pre><code class="r">shinyUI(pageWithSidebar(
+shinyUI(pageWithSidebar(
        headerPanel(&quot;Predicting Weight of Children at Birth&quot;),
        sidebarPanel( 
 

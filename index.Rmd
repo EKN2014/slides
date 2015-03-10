@@ -31,27 +31,27 @@ After loading the data set, i built the regression model using bwt as the outcom
 ```{r, results='hide'}
 library(MASS)
 library(plyr)
-data(birthwt)
+#data(birthwt)
 
-birthwt$race <- as.factor(birthwt$race)
-birthwt$smoke <- as.factor(birthwt$smoke)
-birthwt$ui <- as.factor(birthwt$ui)
-birthwt$low <- as.factor(birthwt$low)
+#birthwt$race <- as.factor(birthwt$race)
+#birthwt$smoke <- as.factor(birthwt$smoke)
+#birthwt$ui <- as.factor(birthwt$ui)
+#birthwt$low <- as.factor(birthwt$low)
 
-fit <- lm(bwt~., data=birthwt)
+#fit <- lm(bwt~., data=birthwt)
 
-step <- stepAIC(fit, direction="both")
-step$anova
+#step <- stepAIC(fit, direction="both")
+#step$anova
 
-bestfit <- lm(bwt ~ age +  race + smoke + ui +low , data=birthwt)
+#bestfit <- lm(bwt ~ age +  race + smoke + ui +low , data=birthwt)
 
 
-predictbwt <- function(age1, race1, smoke1, ui1, low1)
-{
-        newdata<- data.frame(age=age1, race=race1, smoke=smoke1, ui=ui1, low=low1)
-        res <-round(predict(bestfit, newdata)[[1]], 2)
-        res
-}
+#predictbwt <- function(age1, race1, smoke1, ui1, low1)
+#{
+#        newdata<- data.frame(age=age1, race=race1, smoke=smoke1, ui=ui1, low=low1)
+#        res <-round(predict(bestfit, newdata)[[1]], 2)
+#        res
+#}
 ```
 
 --- 
@@ -87,7 +87,7 @@ There are five input values in server.R. The output widgets are put in the main 
 
 ```{r, results='hide'}
 library(shiny)
-data(birthwt)
+#data(birthwt)
 
 shinyUI(pageWithSidebar(
        headerPanel("Predicting Weight of Children at Birth"),

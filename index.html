@@ -1,1 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exploring determinants of low birth weight among children</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Exploring determinants of low birth weight among children">
+  <meta name="author" content="Elizabeth">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/slides" 
+    src="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
 
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Exploring determinants of low birth weight among children</h1>
+    <h2></h2>
+    <p>Elizabeth<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <p>Predicting the value of mpg for cars</p>
+
+<p>In this project, I am studying determinants of birth weight among children. The dataset used is an R dataset, birthwt. The data set is used to create a &#39;LM&#39; model based on the selected predictors. These predictors were selected using stepwise regression. The selected predictors are - low, race, smoke, ui. Age was however used in the model because the author thought it was important in predicting birthweight of children. Very young women are more likely to get children with low birth weight.</p>
+
+<p>Outline of this pitch
+.server.R
+.ui.R
+.Output</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <article data-timings="">
+    <p>Computation</p>
+
+<p>After loading the data set, i built the regression model using bwt as the outcome variable and low, race, ui, age and smoke as predictor variables </p>
+
+<pre><code class="r">library(MASS)
+</code></pre>
+
+<pre><code>## Error in FUN(&quot;birthwt&quot;[[1L]], ...): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
+</code></pre>
+
+<pre><code class="r">library(plyr)
+data(birthwt)
+</code></pre>
+
+<pre><code>## Warning in data(birthwt): data set &#39;birthwt&#39; not found
+</code></pre>
+
+<pre><code class="r">birthwt$race &lt;- as.factor(birthwt$race)
+</code></pre>
+
+<pre><code>## Warning in is.factor(x): restarting interrupted promise evaluation
+</code></pre>
+
+<pre><code>## Error in is.factor(x): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
+</code></pre>
+
+<pre><code class="r">birthwt$smoke &lt;- as.factor(birthwt$smoke)
+</code></pre>
+
+<pre><code>## Warning in is.factor(x): restarting interrupted promise evaluation
+</code></pre>
+
+<pre><code>## Error in is.factor(x): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
+</code></pre>
+
+<pre><code class="r">birthwt$ui &lt;- as.factor(birthwt$ui)
+</code></pre>
+
+<pre><code>## Warning in is.factor(x): restarting interrupted promise evaluation
+</code></pre>
+
+<pre><code>## Error in is.factor(x): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
+</code></pre>
+
+<pre><code class="r">birthwt$low &lt;- as.factor(birthwt$low)
+</code></pre>
+
+<pre><code>## Warning in is.factor(x): restarting interrupted promise evaluation
+</code></pre>
+
+<pre><code>## Error in is.factor(x): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
+</code></pre>
+
+<pre><code class="r">fit &lt;- lm(bwt~., data=birthwt)
+</code></pre>
+
+<pre><code>## Warning in is.data.frame(data): restarting interrupted promise evaluation
+</code></pre>
+
+<pre><code>## Error in is.data.frame(data): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
+</code></pre>
+
+<pre><code class="r">step &lt;- stepAIC(fit, direction=&quot;both&quot;)
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;stepAIC&quot;
+</code></pre>
+
+<pre><code class="r">step$anova
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
+</code></pre>
+
+<pre><code class="r">bestfit &lt;- lm(bwt ~ age +  race + smoke + ui +low , data=birthwt)
+</code></pre>
+
+<pre><code>## Warning in is.data.frame(data): restarting interrupted promise evaluation
+</code></pre>
+
+<pre><code>## Error in is.data.frame(data): cannot open file &#39;C:/Users/Elizabeth/Desktop/Datascience/Coursera/Developing_Data_Products/slidify1/slidify/.cache/unnamed-chunk-1_3e78e714984d5cb6380f010f5e0148d1.rdb&#39;: No such file or directory
+</code></pre>
+
+<pre><code class="r">predictbwt &lt;- function(age1, race1, smoke1, ui1, low1)
+{
+        newdata&lt;- data.frame(age=age1, race=race1, smoke=smoke1, ui=ui1, low=low1)
+        res &lt;-round(predict(bestfit, newdata)[[1]], 2)
+        res
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <article data-timings="">
+    <p>server.R</p>
+
+<p>Here i assigned the input values to interactive part of the code using the shiny syntax. The user will be required to enter the values of age, low, ui, smoke and race</p>
+
+<pre><code class="r">library(shiny)
+shinyServer(
+        function(input, output) {
+           output$oage &lt;- renderPrint({input$inputage})
+           output$orace &lt;- renderPrint({input$inputrace})
+           output$osmoke &lt;- renderPrint({input$inputsmoke})
+           output$oui &lt;- renderPrint({input$inputui})
+           output$low &lt;- renderPrint({input$inputlow})
+           output$obwt &lt;- renderPrint({predictbwt(input$inputage,
+                          input$inputrace, input$inputsmoke,input$inputui,input$inputlow)})
+
+})
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <article data-timings="">
+    <p>ui.R</p>
+
+<p>There are five input values in server.R. The output widgets are put in the main panel. </p>
+
+<pre><code class="r">library(shiny)
+data(birthwt)
+</code></pre>
+
+<pre><code>## Warning in data(birthwt): data set &#39;birthwt&#39; not found
+</code></pre>
+
+<pre><code class="r">shinyUI(pageWithSidebar(
+       headerPanel(&quot;Predicting Weight of Children at Birth&quot;),
+       sidebarPanel( 
+
+        h3 (&quot;Enter Predicting Variables&quot;), 
+        sliderInput(&quot;inputage&quot;,&quot;Mother&#39;s age in years&quot;, min = 16,
+                    max=50, value = 16,step =1),
+        selectInput(&quot;inputrace&quot;, &quot;Mother&#39;s race (1 = white, 2 = black, 3 = other)&quot;,
+                     c(&quot;1&quot;,&quot;2&quot;,&quot;3&quot;)),
+        selectInput(&quot;inputsmoke&quot;, &quot;Smoking status during pregnancy&quot;,
+                     c(&quot;0&quot;,&quot;1&quot;)),
+        selectInput(&quot;inputui&quot;, &quot;Presence of uterine irritability&quot;,
+                     c(&quot;0&quot;,&quot;1&quot;)),
+        selectInput(&quot;inputlow&quot;, &quot;Indicator of birth weight less than 2.5 kg&quot;,
+                    c(&quot;0&quot;,&quot;1&quot;))
+),
+
+mainPanel( 
+                h3 (&quot;You selected&quot;),
+                h4 (&quot;Age of mother is&quot;),
+                verbatimTextOutput(&quot;oage&quot;),
+                h4(&quot;Race of mother is&quot;), 
+                verbatimTextOutput(&quot;orace&quot;), 
+                h4(&quot;Is mother smoking or not&quot;), 
+                verbatimTextOutput(&quot;osmoke&quot;),
+                h4(&quot;Did the mother have uterine irritability or not&quot;), 
+                verbatimTextOutput(&quot;oui&quot;),
+                h4(&quot;Anything to show lpossibility of low birth weight&quot;), 
+                verbatimTextOutput(&quot;low&quot;),
+                h4(&quot;=================================&quot;),
+                h3 (&quot;Birth Weight Predicted in grams&quot;), 
+                h4(&quot;=================================&quot;), 
+                verbatimTextOutput(&quot;obwt&quot;)
+
+                ) 
+    ))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title=''>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title=''>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title=''>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title=''>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
